@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Regression Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            background: #2575fc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #6a11cb;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        .output p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Linear Regression Predictor</h1>
+        <div class="form-group">
+            <label for="yearsExperience">Enter Years of Experience:</label>
+            <input type="number" id="yearsExperience" placeholder="Enter a value (e.g., 5)">
+        </div>
+        <button onclick="predictSalary()">Predict Salary</button>
+        <div class="output" id="output">
+            <p>Predicted salary will be displayed here.</p>
+        </div>
+    </div>
+
+    <script>
+        // Linear Regression Parameters
+        const slope = 7046.77; 
+        const intercept = 58283.28; 
+
+        // Predict salary based on user input
+        function predictSalary() {
+            const yearsExperience = document.getElementById("yearsExperience").value;
+            const output = document.getElementById("output");
+
+            if (!yearsExperience) {
+                output.innerHTML = "<p style='color: red;'>Please enter a valid value!</p>";
+                return;
+            }
+            if (yearsExperience < 0) {
+            output.innerHTML = "<p style='color: red;'>Years of experience cannot be negative!</p>";
+            return;
+            }
+            if (yearsExperience == 0){
+                const predictedSalary = slope * yearsExperience + intercept;
+                output.innerHTML = `<p>The Base salary is: <strong>₹${predictedSalary.toFixed(2)}</strong></p>`;
+                return;
+            } 
+
+            // Prediction formula: y = mx + c
+            const predictedSalary = slope * yearsExperience + intercept;
+            output.innerHTML = `<p>For ${yearsExperience} years of experience, the predicted salary is: <strong>₹${predictedSalary.toFixed(2)}</strong></p>`;
+        }
+    </script>
+</body>
+</html>
